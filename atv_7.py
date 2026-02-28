@@ -22,7 +22,7 @@ def decisao():
 
         if decisao == "Y":
             i += 1
-            print(i)
+
         elif decisao == "N":
             sort(lista)
             break
