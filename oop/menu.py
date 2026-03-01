@@ -1,6 +1,6 @@
 from Livro import *
 
-biblioteca = Biblioteca()
+biblioteca = Biblioteca(livros)
 
 def menu():
     while True:
