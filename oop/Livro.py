@@ -46,8 +46,8 @@ class Ebook(Livro):
 
 
 class Biblioteca:
-    def __init__(self, livros=None):
-        self.livros = livros or []
+    def __init__(self, livros):
+        self.livros =  []
 
     def AdicionarLivro(self, livro: Livro) -> str:
         #Não funciona

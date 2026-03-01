@@ -53,7 +53,7 @@ def AdicionarLivro():
             livro_disponivel = True
             tamanho_arquivo = input("Qual o tamanho do arquivo: ")
             formato_arquivo = input("Qual o formato do arquivo do Ebook")
-            Ebook(titulo_livro, autor_livro, livro_disponivel, tamanho_arquivo, formato_arquivo)
+            Ebook(titulo_livro, autor_livro, ano_livro, livro_disponivel, tamanho_arquivo, formato_arquivo)
     else:
             print("Você digitou uma opção invalida")
             
