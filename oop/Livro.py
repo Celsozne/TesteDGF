@@ -1,3 +1,5 @@
+import json
+
 class Livro:
     def __init__(
         self, titulo: str, autor: str, ano_publicacao: str, disponivel: bool = True
@@ -62,7 +64,7 @@ class Biblioteca:
         self.livros = []
 
     def AdicionarLivro(self,) -> str:
-        # Não funciona
+        # Talvez Funciona
         escolha: str = input("Voce deseja cadastrar um livro Fisico ou um Ebook?(DIgite F para Fisico e E para EBook )")
         
     
@@ -71,13 +73,12 @@ class Biblioteca:
             autor_livro = input("Autor do Livro: ")
             ano_livro = input("Ano de Publicacao: ")
             livro_disponivel = True
-            numero_paginas = input("Quantidade de Paginas do Livro: ")
+            numero_paginas = input("Quantidade de Paginas do Livro: ")     
+            #new_book = print(vars(LivroFisico(titulo,livro_disponivel, ano_livro, livro_disponivel, numero_paginas)))#printa certo, tenho que alocar num lugar para salvar
                    
-            
-            LivroFisico(titulo, autor_livro, ano_livro, livro_disponivel, numero_paginas)
-        
-        
-            print(f"Livro '{titulo}' foi adicionado corretamente")
+            with open("object.json", "w") as file:
+                json.dump(LivroFisico(titulo,livro_disponivel, ano_livro, livro_disponivel, numero_paginas).__dict__, file)
+                print(vars(LivroFisico(titulo,livro_disponivel, ano_livro, livro_disponivel, numero_paginas)))#printa certo
         elif escolha == "E":
             titulo_livro = input("Titulo do Livro: ")
             autor_livro = input("Autor do Livro: ")
@@ -85,26 +86,30 @@ class Biblioteca:
             livro_disponivel = True
             tamanho_arquivo = input("Qual o tamanho do arquivo: ")
             formato_arquivo = input("Qual o formato do arquivo do Ebook")
-            
-            Ebook(
-                        titulo_livro,
-                        autor_livro,
-                        ano_livro,
-                        livro_disponivel,
-                        tamanho_arquivo,
-                        formato_arquivo,
-                    )
-                    
+            #vou ter de salvar num json(só salva 1, vou ver dps)
+        
+            #print(vars(Ebook(titulo_livro, autor_livro, ano_livro, livro_disponivel, tamanho_arquivo, formato_arquivo)))#printa certo, tenho que alocar num lugar para salvar
+            with open("object.json", "w") as file:
+                json.dump(Ebook(titulo_livro, autor_livro, ano_livro, livro_disponivel, tamanho_arquivo, formato_arquivo).__dict__, file)
+            print(vars(Ebook(titulo_livro, autor_livro, ano_livro, livro_disponivel, tamanho_arquivo, formato_arquivo)))#printa certo
         else:
             print("Você digitou uma opção invalida")    
         
 
     def RemoverLivro(self, titulo: str) -> str:
-        for livro in self.livros:
-            if livro.titulo == titulo:#tribute error
-                self.livros.remove(livro)
-                print(f"Livro '{titulo}' removido com sucesso")
-        print(f"Livro '{titulo}' nao existe no banco de dados")
+        #Esse for sera´feito no banco de dados para verificar
+        try:
+            with open("object.json"):
+                data = json.loads("object.json")#erro no parse?
+                
+                if titulo in data:
+                    if "num_paginas".exist :
+                        del data['titulo', 'autor', 'ano_publicacao', 'disponivel', 'num_paginas']
+                elif "tamanho_arquivo".exist: 
+                    del data['titulo', 'autor', 'ano_publicacao', 'disponivel', 'tamanho_arquivo', 'formato']
+        except ValueError:
+            print(f"Erro {ValueError}" )
+            
 
     def ListarLivrosDisponiveis(self) -> str:
         disponiveis = [livro for livro in self.livros if livro.disponivel]
@@ -114,7 +119,7 @@ class Biblioteca:
         print((livro.ExibirInfo() for livro in disponiveis))
 
     def ExibirInfoTitulo(self, titulo: str) -> str:
-        for livro in self.livros:#tribute error
+        for livro in self.livros:#nao tem base de dados para encontrar
             if livro.titulo == titulo:
                 return livro.ExibirInfo()
         print(f"Livro '{titulo}' nao encontrado")
