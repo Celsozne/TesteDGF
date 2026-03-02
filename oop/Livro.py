@@ -98,6 +98,7 @@ class Biblioteca:
 
     def RemoverLivro(self, titulo: str) -> str:
         #Esse for sera´feito no banco de dados para verificar
+        titulo = input("Titulo do livro que você quer apagar: ")
         try:
             with open("object.json"):
                 data = json.load("object.json")#erro no decoder?
