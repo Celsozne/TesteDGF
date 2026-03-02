@@ -100,8 +100,7 @@ class Biblioteca:
         #Esse for sera´feito no banco de dados para verificar
         try:
             with open("object.json"):
-                data = json.loads("object.json")#erro no parse?
-                
+                data = json.load("object.json")#erro no decoder?
                 if titulo in data:
                     if "num_paginas".exist :
                         del data['titulo', 'autor', 'ano_publicacao', 'disponivel', 'num_paginas']
@@ -112,11 +111,10 @@ class Biblioteca:
             
 
     def ListarLivrosDisponiveis(self) -> str:
-        disponiveis = [livro for livro in self.livros if livro.disponivel]
-        if not disponiveis:#tribute error
-            # So da esse resultado, entao nao sei se funciona
-            print("Nao existem livros disponiveis")
-        print((livro.ExibirInfo() for livro in disponiveis))
+        try: 
+            pass
+        except ValueError: 
+            print(f"Erro {ValueError}")
 
     def ExibirInfoTitulo(self, titulo: str) -> str:
         for livro in self.livros:#nao tem base de dados para encontrar
