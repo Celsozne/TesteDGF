@@ -1,6 +1,6 @@
 from Livro import *
 
-biblioteca = Biblioteca(livros)
+biblioteca = Biblioteca()
 
 def menu():
     while True:
@@ -8,7 +8,7 @@ def menu():
             print("1 - Adicionar Livro")
             print("2 - Remover Livro")
             print("3 - Mostrar Livros Disponiveis")
-            print("4 - Pesquisar Informacoes") 
+            print("4 - Pesquisar Informacoes")
             print("5 - Pegar um Livro emprestado'")
             print("6 - Devolver Livro")
             print("0 - Devolver Livro")
@@ -37,26 +37,9 @@ def menu():
 
 
 def AdicionarLivro():
+    
+    biblioteca.AdicionarLivro()
 
-    ebook_fisico = input("Voce deseja cadastrar um livro Fisico ou um Ebook?(DIgite F para Fisico e E para EBook )")
-    if ebook_fisico == "F":
-            titulo_livro = input("Titulo do Livro: ")
-            autor_livro = input("Autor do Livro: ")
-            ano_livro = input("Ano de Publicacao: ")
-            livro_disponivel = True
-            numero_paginas = input("Quantidade de Paginas do Livro: ")
-            LivroFisico(titulo_livro, autor_livro, ano_livro, livro_disponivel, numero_paginas)
-    elif ebook_fisico == "E":
-            titulo_livro = input("Titulo do Livro: ")
-            autor_livro = input("Autor do Livro: ")
-            ano_livro = input("Ano de Publicacao: ")
-            livro_disponivel = True
-            tamanho_arquivo = input("Qual o tamanho do arquivo: ")
-            formato_arquivo = input("Qual o formato do arquivo do Ebook")
-            Ebook(titulo_livro, autor_livro, ano_livro, livro_disponivel, tamanho_arquivo, formato_arquivo)
-    else:
-            print("Você digitou uma opção invalida")
-            
 
 
 def RemoverLivro():
@@ -81,4 +64,3 @@ def Emprestar():
 def Devolver():
     titulo = input("Titulo do livro para devolver: ")
     return biblioteca.DevolverLivro(titulo)
-
