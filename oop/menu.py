@@ -52,7 +52,7 @@ def ListarLivrosDisponiveis():
 
 
 def ExibirInfos():
-    titulo = input("Titulo do Livro que voce quer as informacoes: ")
+    titulo = ''
     return biblioteca.ExibirInfoTitulo(titulo)
 
 

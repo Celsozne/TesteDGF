@@ -1,4 +1,4 @@
-import json
+
 
 class Livro:
     def __init__(
@@ -11,18 +11,14 @@ class Livro:
 
     # alterar o atributo de True para False para emprestar
     def emprestar(self) -> bool:
-        pass
+        self.disponivel = False
 
     # alterar o atributo de False para True para devolver
     def devolver(self) -> bool:
-        pass
+        self.disponivel = True
 
     def ExibirInfo(self) -> str:
-        return (
-            f"Titulo: {self.titulo} Autor: {self.autor} "
-            f"Ano de Publicacao: {self.ano_publicacao} Disponivel: {self.disponivel}"
-        )
-
+       print()
 
 class LivroFisico(Livro):
     def __init__(
@@ -37,7 +33,7 @@ class LivroFisico(Livro):
         self.num_paginas = int(num_paginas)
 
     def InfoFisico(self) -> str:
-        base = super().ExibirInfo()
+        base = Livro.ExibirInfo()
         return f"{base} Paginas: {self.num_paginas}"
 
 
@@ -56,16 +52,15 @@ class Ebook(Livro):
         self.formato = formato
 
     def InfoEbook(self) -> str:
-        base = super().ExibirInfoxibirInfo()
-        return f"{base} Tamanho: {self.tamanho_arquivo} Formato: {self.formato}"
+        print()
 
 class Biblioteca:
     def __init__(self):
-        self.livros =[Livro] #povoar a lista com as informacoes do json!!
-
+        self.livros =[] #povoar a lista com as informacoes do json!!
+        
 
     def AdicionarLivro(self,) -> str:
-        # Talvez Funciona
+        #Funciona
         escolha: str = input("Voce deseja cadastrar um livro Fisico ou um Ebook?(DIgite F para Fisico e E para EBook )")
         
     
@@ -75,12 +70,12 @@ class Biblioteca:
             ano_livro = input("Ano de Publicacao: ")
             livro_disponivel = True
             numero_paginas = input("Quantidade de Paginas do Livro: ")     
-            #new_book = print(vars(LivroFisico(titulo,livro_disponivel, ano_livro, livro_disponivel, numero_paginas)))#printa certo, tenho que alocar num lugar para salvar
-                   
-            with open("object.json", "w") as file:
-                json.dump(LivroFisico(titulo,livro_disponivel, ano_livro, livro_disponivel, numero_paginas).__dict__, file)
-                self.livros.append(LivroFisico)
-                print(vars(LivroFisico(titulo,livro_disponivel, ano_livro, livro_disponivel, numero_paginas)))#printa certo
+            
+            
+            self.livros.append(LivroFisico(titulo,livro_disponivel, ano_livro, livro_disponivel, numero_paginas).__dict__)
+            print(self.livros)
+        
+        
         elif escolha == "E":
             titulo_livro = input("Titulo do Livro: ")
             autor_livro: str = str(input("Autor do Livro: "))
@@ -88,51 +83,37 @@ class Biblioteca:
             livro_disponivel = True
             tamanho_arquivo = input("Qual o tamanho do arquivo: ")
             formato_arquivo = input("Qual o formato do arquivo do Ebook")
-            #vou ter de salvar num json(só salva 1, vou ver dps)
-        
-            #print(vars(Ebook(titulo_livro, autor_livro, ano_livro, livro_disponivel, tamanho_arquivo, formato_arquivo)))#printa certo, tenho que alocar num lugar para salvar
-            with open("object.json", "w") as file:
-                json.dump(Ebook(titulo_livro, autor_livro, ano_livro, livro_disponivel, tamanho_arquivo, formato_arquivo).__dict__, file)
-            print(vars(Ebook(titulo_livro, autor_livro, ano_livro, livro_disponivel, tamanho_arquivo, formato_arquivo)))#printa certo
+            
+            self.livros.append(Ebook(titulo_livro, autor_livro, ano_livro, livro_disponivel, tamanho_arquivo, formato_arquivo).__dict__)
+            print(self.livros)
+            
         else:
             print("Você digitou uma opção invalida")    
         
 
     def RemoverLivro(self, titulo: str) -> str:
-        #Esse for sera´feito no banco de dados para verificar
+        #Remover um objeto da lista livros
+        #nao ta apagando
         titulo = input("Titulo do livro que você quer apagar: ")
-        try:
-            with open("object.json", "r") as file:
-                data = json.load(file)
-                if titulo in data:
-                    if "num_paginas".exist: #como vejo a existencia de uma propriedade?
-                        del data['titulo', 'autor', 'ano_publicacao', 'disponivel', 'num_paginas']
-                elif "tamanho_arquivo".exist: 
-                    del data['titulo', 'autor', 'ano_publicacao', 'disponivel', 'tamanho_arquivo', 'formato']
-        except ValueError:
-            print(f"Erro {ValueError}" )
+                
+        
+        
+            
             
 
     def ListarLivrosDisponiveis(self) -> str:
-        try: 
-            pass
-        except ValueError: 
-            print(f"Erro {ValueError}")
+        disponiveis = [titulo for titulo in self.livros if "disponivel" == True ]
+        print(disponiveis) #printa mans tenho que ver se mostra só com status disponivel ==true
 
     def ExibirInfoTitulo(self, titulo: str) -> str:
-        for livro in self.livros:#nao tem base de dados para encontrar
-            if livro.titulo == titulo:
-                return livro.ExibirInfo()
-        print(f"Livro '{titulo}' nao encontrado")
+        titulo_input = input("Qual o titulo do livro que você quer saber as informações: ")
+        disponiveis = [titulo_input for titulo in self.livros if 'titulo'] #preciso filtar as informações do objeto baseado no titulo
+        print(disponiveis) 
 
     def EmprestarLivro(self, titulo: str) -> str:
-        for livro in self.livros:#tribute error
-            if livro.titulo == titulo:
-                if livro.emprestar():
-                    print(f"Livro '{titulo}' emprestado com sucesso")
-                else:
-                    return f"Livro '{titulo}' nao esta disponivel"
-        return f"Livro '{titulo}' nao encontrado"
+        livro_selecionado = [titulo for titulos in self.livros if 'titulo' == titulo ]
+        print(livro_selecionado) 
+        #transforma de true em false
 
 
 # Como eu devolvo ou empresto um livro?
