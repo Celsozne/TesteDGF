@@ -61,7 +61,8 @@ class Ebook(Livro):
 
 class Biblioteca:
     def __init__(self):
-        self.livros = []
+        self.livros =[Livro] #povoar a lista com as informacoes do json!!
+
 
     def AdicionarLivro(self,) -> str:
         # Talvez Funciona
@@ -70,7 +71,7 @@ class Biblioteca:
     
         if escolha == "F":
             titulo = input("Titulo do Livro: ")
-            autor_livro = input("Autor do Livro: ")
+            autor_livro:str = str(input("Autor do Livro: "))
             ano_livro = input("Ano de Publicacao: ")
             livro_disponivel = True
             numero_paginas = input("Quantidade de Paginas do Livro: ")     
@@ -78,10 +79,11 @@ class Biblioteca:
                    
             with open("object.json", "w") as file:
                 json.dump(LivroFisico(titulo,livro_disponivel, ano_livro, livro_disponivel, numero_paginas).__dict__, file)
+                self.livros.append(LivroFisico)
                 print(vars(LivroFisico(titulo,livro_disponivel, ano_livro, livro_disponivel, numero_paginas)))#printa certo
         elif escolha == "E":
             titulo_livro = input("Titulo do Livro: ")
-            autor_livro = input("Autor do Livro: ")
+            autor_livro: str = str(input("Autor do Livro: "))
             ano_livro = input("Ano de Publicacao: ")
             livro_disponivel = True
             tamanho_arquivo = input("Qual o tamanho do arquivo: ")
@@ -100,10 +102,10 @@ class Biblioteca:
         #Esse for sera´feito no banco de dados para verificar
         titulo = input("Titulo do livro que você quer apagar: ")
         try:
-            with open("object.json"):
-                data = json.load("object.json")#erro no decoder?
+            with open("object.json", "r") as file:
+                data = json.load(file)
                 if titulo in data:
-                    if "num_paginas".exist :
+                    if "num_paginas".exist: #como vejo a existencia de uma propriedade?
                         del data['titulo', 'autor', 'ano_publicacao', 'disponivel', 'num_paginas']
                 elif "tamanho_arquivo".exist: 
                     del data['titulo', 'autor', 'ano_publicacao', 'disponivel', 'tamanho_arquivo', 'formato']

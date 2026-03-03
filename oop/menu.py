@@ -43,7 +43,7 @@ def AdicionarLivro():
 
 
 def RemoverLivro():
-    titulo = input("Qual Livro voce quer remover (Escreva o Titulo): ")
+    titulo = ''
     return biblioteca.RemoverLivro(titulo)
 
 
