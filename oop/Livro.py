@@ -102,8 +102,8 @@ class Biblioteca:
             
 
     def ListarLivrosDisponiveis(self) -> str:
-        disponiveis = dict(filter(lambda disponivel: 'disponivel' == True in self.livros))#me retorna {} vazio
-        print(disponiveis) #esta filtrando e printando , só preciso saber como tornar isso em dictionary
+        disponiveis = list(filter(lambda disponivel: 'disponivel' == True in self.livros, self.livros))#me retorna []] vazio
+        print(disponiveis) #esta filtrando e printando []
         
         
     def ExibirInfoTitulo(self, titulo: str) -> str:
