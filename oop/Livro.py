@@ -102,18 +102,18 @@ class Biblioteca:
             
 
     def ListarLivrosDisponiveis(self) -> str:
-        disponiveis = filter(lambda w: 'disponivel' == True, self.livros)#ver se tenho de trocar de true pra false
+        disponiveis = dict(filter(lambda disponivel: 'disponivel' == True in self.livros))#me retorna {} vazio
         print(disponiveis) #esta filtrando e printando , só preciso saber como tornar isso em dictionary
         
         
     def ExibirInfoTitulo(self, titulo: str) -> str:
         titulo_input = input("Qual o titulo do livro que você quer saber as informações: ")
-        disponiveis = [lambda w: titulo_input in self.livros, self.livros] #erro no filtro mas lê a lista corretamente
-        print(disponiveis) 
+        disponiveis = [lambda titulo_input: titulo_input in self.livros, self.livros] #erro no filtro mas lê a lista corretamente
+        print(disponiveis) #qualquer valor retorna a lista toda
 
     def EmprestarLivro(self, titulo: str) -> str:
         titulo_input = input("Titulo do livro para emprestar: ")
-        livro_selecionado = [lambda w: titulo_input in self.livros, self.livros ]
+        livro_selecionado = [lambda w: titulo_input in self.livros, self.livros ]#erro no filtro
         print(livro_selecionado) 
         #transforma de true em false
 
