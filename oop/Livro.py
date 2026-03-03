@@ -56,7 +56,7 @@ class Ebook(Livro):
 
 class Biblioteca:
     def __init__(self):
-        self.livros = livros = [] #povoar a lista com as informacoes do json!!
+        self.livros = [] #funcionando
         
 
     def AdicionarLivro(self,) -> str:
@@ -102,17 +102,18 @@ class Biblioteca:
             
 
     def ListarLivrosDisponiveis(self) -> str:
-        disponiveis = filter(lambda w: 'disponivel' == True, self.livros)
-        print(disponiveis) #esta filtrando e printado , só preciso saber como tornar isso em dictionary
+        disponiveis = filter(lambda w: 'disponivel' == True, self.livros)#ver se tenho de trocar de true pra false
+        print(disponiveis) #esta filtrando e printando , só preciso saber como tornar isso em dictionary
         
         
     def ExibirInfoTitulo(self, titulo: str) -> str:
         titulo_input = input("Qual o titulo do livro que você quer saber as informações: ")
-        disponiveis = [titulo_input for titulo in self.livros if 'titulo'] #preciso filtar as informações do objeto baseado no titulo
+        disponiveis = [lambda w: titulo_input in self.livros, self.livros] #erro no filtro mas lê a lista corretamente
         print(disponiveis) 
 
     def EmprestarLivro(self, titulo: str) -> str:
-        livro_selecionado = [titulo for titulos in self.livros if 'titulo' == titulo ]
+        titulo_input = input("Titulo do livro para emprestar: ")
+        livro_selecionado = [lambda w: titulo_input in self.livros, self.livros ]
         print(livro_selecionado) 
         #transforma de true em false
 

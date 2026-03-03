@@ -57,7 +57,7 @@ def ExibirInfos():
 
 
 def Emprestar():
-    titulo = input("Titulo do livro para emprestar: ")
+    titulo = ''
     return biblioteca.EmprestarLivro(titulo)
 
 
