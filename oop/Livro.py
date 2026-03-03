@@ -56,7 +56,7 @@ class Ebook(Livro):
 
 class Biblioteca:
     def __init__(self):
-        self.livros =[] #povoar a lista com as informacoes do json!!
+        self.livros = livros = [] #povoar a lista com as informacoes do json!!
         
 
     def AdicionarLivro(self,) -> str:
@@ -68,7 +68,7 @@ class Biblioteca:
             titulo = input("Titulo do Livro: ")
             autor_livro:str = str(input("Autor do Livro: "))
             ano_livro = input("Ano de Publicacao: ")
-            livro_disponivel = True
+            livro_disponivel = False
             numero_paginas = input("Quantidade de Paginas do Livro: ")     
             
             
@@ -102,9 +102,10 @@ class Biblioteca:
             
 
     def ListarLivrosDisponiveis(self) -> str:
-        disponiveis = [titulo for titulo in self.livros if "disponivel" == True ]
-        print(disponiveis) #printa mans tenho que ver se mostra só com status disponivel ==true
-
+        disponiveis = filter(lambda w: 'disponivel' == True, self.livros)
+        print(disponiveis) #esta filtrando e printado , só preciso saber como tornar isso em dictionary
+        
+        
     def ExibirInfoTitulo(self, titulo: str) -> str:
         titulo_input = input("Qual o titulo do livro que você quer saber as informações: ")
         disponiveis = [titulo_input for titulo in self.livros if 'titulo'] #preciso filtar as informações do objeto baseado no titulo
