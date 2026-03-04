@@ -108,7 +108,7 @@ class Biblioteca:
         
         livro_selecionado:dict = list(filter(lambda livro: livro['titulo'] == titulo, self.livros)) 
         try:
-            if livro_selecionado[0]['disponivel'] == True:
+            if livro_selecionado[0].get('disponivel') == True:
                 livro_selecionado[0]['disponivel'] = False
                 print(f" O Livro {titulo} foi emprestado com sucesso ")
             else:
@@ -118,11 +118,14 @@ class Biblioteca:
 
 
     def DevolverLivro(self, titulo: str):
-        livro_escolhido = list(filter(lambda livro: livro['titulo'] == titulo, self.livros)) 
-        if livro_escolhido[0]['disponivel'] == True:
-            livro_escolhido[0]['disponivel'] = False
-            print(f"O livro {titulo} foi devolvido com o suceso")
-        else:#COMO CAPTURAR ESSE ERRO?
-            print("Ocorreu um erro ao devolver o livro")
+        livro_escolhido:dict = list(filter(lambda livro: livro['titulo'] == titulo, self.livros)) 
+        try:
+            if livro_escolhido[0].get('disponivel') == False:
+                livro_escolhido[0]['disponivel'] = True
+                print(f" O Livro {titulo} foi emprestado com sucesso ")
+            else:
+                print("Livro indisponivel")
+        except IndexError:#nao consigo capturar o erro
+            print("Esse livro nao existe na biblioteca")
 
 # Como eu devolvo ou empresto um livro?
