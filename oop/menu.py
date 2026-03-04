@@ -5,6 +5,8 @@ biblioteca = Biblioteca()
 def menu():
     while True:
         try:
+            
+
             print("1 - Adicionar Livro")
             print("2 - Remover Livro")
             print("3 - Mostrar Livros Disponiveis")
@@ -37,10 +39,7 @@ def menu():
 
 
 def AdicionarLivro():
-    
     biblioteca.AdicionarLivro()
-
-
 
 def RemoverLivro():
     titulo = ''
@@ -57,10 +56,11 @@ def ExibirInfos():
 
 
 def Emprestar():
-    titulo = ''
+    titulo = input("Titulo do livro a ser emprestado: ")
     return biblioteca.EmprestarLivro(titulo)
 
 
 def Devolver():
     titulo = input("Titulo do livro para devolver: ")
     return biblioteca.DevolverLivro(titulo)
+

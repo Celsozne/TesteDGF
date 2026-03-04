@@ -1,24 +1,23 @@
 
 
 class Livro:
-    def __init__(
-        self, titulo: str, autor: str, ano_publicacao: str, disponivel: bool = True
-    ):
+    def __init__(self, titulo: str, autor: str, ano_publicacao: str, disponivel: bool
+):
         self.titulo = titulo
         self.autor = autor
         self.ano_publicacao = ano_publicacao
-        self.disponivel = bool(disponivel)
+        self.disponivel = True
 
     # alterar o atributo de True para False para emprestar
     def emprestar(self) -> bool:
-        self.disponivel = False
+        setattr(Livro, self.disponivel, False)
 
     # alterar o atributo de False para True para devolver
     def devolver(self) -> bool:
-        self.disponivel = True
+        setattr(Livro, self.disponivel, True)
 
     def ExibirInfo(self) -> str:
-       print()
+       print(vars(Livro))
 
 class LivroFisico(Livro):
     def __init__(
@@ -33,8 +32,7 @@ class LivroFisico(Livro):
         self.num_paginas = int(num_paginas)
 
     def InfoFisico(self) -> str:
-        base = Livro.ExibirInfo()
-        return f"{base} Paginas: {self.num_paginas}"
+        print(vars(LivroFisico(Livro)))
 
 
 class Ebook(Livro):
@@ -52,7 +50,7 @@ class Ebook(Livro):
         self.formato = formato
 
     def InfoEbook(self) -> str:
-        print()
+        print(vars(Ebook(Livro)))
 
 class Biblioteca:
     def __init__(self):
@@ -68,7 +66,7 @@ class Biblioteca:
             titulo = input("Titulo do Livro: ")
             autor_livro:str = str(input("Autor do Livro: "))
             ano_livro = input("Ano de Publicacao: ")
-            livro_disponivel = False
+            livro_disponivel = True
             numero_paginas = input("Quantidade de Paginas do Livro: ")     
             
             
@@ -92,30 +90,39 @@ class Biblioteca:
         
 
     def RemoverLivro(self, titulo: str) -> str:
-        #Remover um objeto da lista livros
-        #nao ta apagando
         titulo = input("Titulo do livro que você quer apagar: ")
-                
-        
-        
-            
-            
+        remover =self.livros.remove(list(filter(lambda livro: livro['titulo'] == titulo, self.livros)))
+        print(f"O livro {titulo} foi exlcuido com sucesso")
+                       
 
     def ListarLivrosDisponiveis(self) -> str:
-        disponiveis = list(filter(lambda disponivel: 'disponivel' == True in self.livros, self.livros))#me retorna []] vazio
-        print(disponiveis) #esta filtrando e printando []
+        disponiveis = list(filter(lambda livro: livro['disponivel'] == True, self.livros))
+        print(disponiveis)
         
         
     def ExibirInfoTitulo(self, titulo: str) -> str:
-        titulo_input = input("Qual o titulo do livro que você quer saber as informações: ")
-        disponiveis = [lambda titulo_input: titulo_input in self.livros, self.livros] #erro no filtro mas lê a lista corretamente
-        print(disponiveis) #qualquer valor retorna a lista toda
+        livro_escolhido = list(filter(lambda livro: livro['titulo'] == titulo, self.livros)) 
+        print(livro_escolhido)
 
     def EmprestarLivro(self, titulo: str) -> str:
-        titulo_input = input("Titulo do livro para emprestar: ")
-        livro_selecionado = [lambda w: titulo_input in self.livros, self.livros ]#erro no filtro
-        print(livro_selecionado) 
-        #transforma de true em false
+        
+        livro_selecionado:dict = list(filter(lambda livro: livro['titulo'] == titulo, self.livros)) 
+        try:
+            if livro_selecionado[0]['disponivel'] == True:
+                livro_selecionado[0]['disponivel'] = False
+                print(f" O Livro {titulo} foi emprestado com sucesso ")
+            else:
+                print("Livro indisponivel")
+        except IndexError:#nao consigo capturar o erro
+            print("Esse livro nao existe na biblioteca")
 
+
+    def DevolverLivro(self, titulo: str):
+        livro_escolhido = list(filter(lambda livro: livro['titulo'] == titulo, self.livros)) 
+        if livro_escolhido[0]['disponivel'] == True:
+            livro_escolhido[0]['disponivel'] = False
+            print(f"O livro {titulo} foi devolvido com o suceso")
+        else:#COMO CAPTURAR ESSE ERRO?
+            print("Ocorreu um erro ao devolver o livro")
 
 # Como eu devolvo ou empresto um livro?
