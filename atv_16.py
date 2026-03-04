@@ -43,23 +43,20 @@ def troca(array):
     try:
         print(array)
         pos_inicial = int(
-            input(
-                "Qual a posicao do item que você quer trocar de lugar(contagem comeca com 0): "
-            )
-        )
+        input("Qual a posicao do item que você quer trocar de lugar(contagem comeca com 0): "))
         if pos_inicial < 0 or pos_inicial > len(array):
             print("Posicao inicial inexistente")
         else:
             pos_final = int(
-                input("Com qual posicao voce quer troca(contagem comeca com 0): ")
-            )
+                    input("Com qual posicao voce quer troca(contagem comeca com 0): ")
+                    )
             if pos_final < 0 or pos_final > len(array):
                 print("Posicao inicial inexistente")
             else:
                 array[pos_inicial], array[pos_final] = (
-                    array[pos_final],
-                    array[pos_inicial],
-                )
+                        array[pos_final],
+                        array[pos_inicial],
+                        )
         print(array)
     except ValueError:
         print("Posicoes inexistentes")

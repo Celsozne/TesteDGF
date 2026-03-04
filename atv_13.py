@@ -31,24 +31,21 @@ def somar():
     valor1 = float(input("Qual o primeiro valor: "))
     valor2 = float(input("Qual o segundo valor: "))
     print(f"A soma entre {valor1} e {valor2} é {valor1 + valor2}")
-    input()
-    menu()
+
 
 
 def subtrair():
     valor1 = float(input("Digite o primeiro valor: "))
     valor2 = float(input("Digite o segundo valor: "))
     print(f"A subtração entre {valor1} e {valor2} é {valor1 - valor2}")
-    input()
-    menu()
+
 
 
 def multiplicar():
     valor1 = float(input("Qual o primeiro valor: "))
     valor2 = float(input("Qual o segundo valor: "))
     print(f"O valor de {valor1} vezes {valor2} é {valor1 * valor2}")
-    input()
-    menu()
+
 
 
 def dividir():
@@ -58,8 +55,7 @@ def dividir():
         print(f"A divisão entre {valor1} e {valor2} é {valor1 / valor2}")
     else:
         print("Impossível dividir por zero")
-    input()
-    menu()
+  
 
 
 def resto_div():
@@ -69,8 +65,7 @@ def resto_div():
         print(f"O resto de {valor1}/{valor2} é: {valor1 % valor2}")
     else:
         print("Impossível dividir por zero")
-    input()
-    menu()
+
 
 
 def potencia():
@@ -80,8 +75,7 @@ def potencia():
         print(1)
     else:
         print(f"{valor1} elevado a {valor2} é {valor1**valor2}")
-        input()
-        menu()
+
 
 
 if __name__ == "__main__":
